@@ -28,10 +28,8 @@ export default function Inbox({ plans }) {
   // TODO 3 — Derivados. Calcúlalos a partir de plans, decisions y query; NO los guardes en estado.
   //   · pending: los planes cuyo id NO está en decisions.
   //   · decided: los planes cuyo id SÍ está en decisions.
-  //   · visible: los pendientes cuyo `op` o cuyo targetLabel(plan.target) contiene `query`
-  //     (sin distinguir mayúsculas ni espacios al borde). Con query vacío, todos los pendientes.
-  const pending = plans;
-  const decided = [];
+  const pending = plans.filter((plan) => !decisions[plan.id]);
+  const decided = plans.filter((plan) => decisions[plan.id]);
   const visible = pending;
 
   // TODO 4 — clearSearch(): vacía la búsqueda.
