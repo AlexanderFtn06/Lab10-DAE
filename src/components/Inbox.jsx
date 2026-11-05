@@ -30,10 +30,18 @@ export default function Inbox({ plans }) {
   //   · decided: los planes cuyo id SÍ está en decisions.
   const pending = plans.filter((plan) => !decisions[plan.id]);
   const decided = plans.filter((plan) => decisions[plan.id]);
-  const visible = pending;
+  const term = query.trim().toLowerCase();
+  const visible = term === ""
+    ? pending
+    : pending.filter((plan) =>
+        plan.op.toLowerCase().includes(term) ||
+        targetLabel(plan.target).toLowerCase().includes(term)
+      );
 
   // TODO 4 — clearSearch(): vacía la búsqueda.
-  function clearSearch() {}
+  function clearSearch() {
+    setQuery("");
+  }
 
   // TODO 5 — Persistencia. Cada vez que cambie `decisions`, guárdalas con writeStoredDecisions(decisions)
   //   dentro de un useEffect con la dependencia correcta.
