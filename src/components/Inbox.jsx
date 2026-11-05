@@ -45,6 +45,9 @@ export default function Inbox({ plans }) {
 
   // TODO 5 — Persistencia. Cada vez que cambie `decisions`, guárdalas con writeStoredDecisions(decisions)
   //   dentro de un useEffect con la dependencia correcta.
+  useEffect(() => {
+    writeStoredDecisions(decisions);
+  }, [decisions]);
 
   return (
     <section className="inbox" aria-labelledby="inbox-title">
