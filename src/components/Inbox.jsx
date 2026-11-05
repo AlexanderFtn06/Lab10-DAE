@@ -13,16 +13,17 @@ import { readStoredDecisions, writeStoredDecisions } from "../lib/storage";
 
 export default function Inbox({ plans }) {
   // TODO 1 — Estado. Sustituye cada valor de la derecha por una llamada a useState:
-  //   · decisions: empieza con lo que haya guardado (inicialización perezosa: useState(readStoredDecisions),
+  //   · decisions: empieza con lo que haya guardado (inicialización pereziosa: useState(readStoredDecisions),
   //     pasando la FUNCIÓN, sin llamarla).
   //   · query: empieza en "".
-  const [decisions, setDecisions] = [{}, () => {}];
-  const [query, setQuery] = ["", () => {}];
+  const [decisions, setDecisions] = useState(readStoredDecisions);
+  const [query, setQuery] = useState("");
 
   // TODO 2 — decide(id, verdict): anota la decisión SIN modificar el objeto actual.
-  //   Crea un objeto nuevo con la decisión añadida ({ ...current, [id]: verdict }) y pásalo a setDecisions.
-  //   Usa la forma funcional: setDecisions((current) => ...).
-  function decide(id, verdict) {}
+  //   Crea un objeto nuevo con la decisión añadida y pásalo a setDecisions usando la forma funcional.
+  function decide(id, verdict) {
+    setDecisions((current) => ({ ...current, [id]: verdict }));
+  }
 
   // TODO 3 — Derivados. Calcúlalos a partir de plans, decisions y query; NO los guardes en estado.
   //   · pending: los planes cuyo id NO está en decisions.
